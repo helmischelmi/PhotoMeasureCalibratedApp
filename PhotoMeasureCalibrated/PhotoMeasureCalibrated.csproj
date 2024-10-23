@@ -13,4 +13,14 @@
     <PackageReference Include="Telerik.Windows.Controls.ImageEditor.for.Wpf.Xaml" Version="2024.3.924" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SampleImages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SampleImages\SampleImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

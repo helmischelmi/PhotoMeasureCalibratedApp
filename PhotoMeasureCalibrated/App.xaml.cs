@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using PhotoMeasureCalibrated.Models;
 using PhotoMeasureCalibrated.ViewModels;
 
@@ -18,10 +16,13 @@ namespace PhotoMeasureCalibrated
             var model = new MainModel();
             var mainViewModel = new MainViewModel(model);
             var mainWindow = new MainWindow {DataContext = mainViewModel};
-
+           
             //LogginUtils.Init();
 
+            ((MainViewModel)mainWindow.DataContext).ImageFolderPath = "Hello";
+
             mainWindow.Show();
+
         }
     }
 

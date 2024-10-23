@@ -7,12 +7,19 @@
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
         Title="Photo Measure Calibrated " Height="650" Width="1000">
-    <Grid> 
-        <Grid.RowDefinitions> 
-            <RowDefinition /> 
-            <RowDefinition Height="Auto" /> 
-        </Grid.RowDefinitions> 
-        <telerik:RadImageEditor x:Name="ImageEditor"/> 
-        <Button Click="Button_Click" Content="Rotate picture" Grid.Row="1" /> 
-    </Grid> 
+    <Grid Background="LightGoldenrodYellow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Height="25">
+            <Label Margin="10 0">Select Folder:</Label>
+            <TextBox Width="700" Text="{Binding ImageFolderPath}"></TextBox>
+            <TextBlock Width="30"></TextBlock>
+            <Button Content="Select" Width="100" Margin="10 0" 
+                    Command="{Binding SelectFolderCommand}"/>
+        </StackPanel>
+        <telerik:RadImageEditor x:Name="ImageEditor"/>
+        <Button Click="Button_Click" Content="Rotate picture" Grid.Row="2" />
+    </Grid>
 </Window>

@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace PhotoMeasureCalibrated.Models;
 
-internal class MainModel
+public class MainModel
 {
 }
