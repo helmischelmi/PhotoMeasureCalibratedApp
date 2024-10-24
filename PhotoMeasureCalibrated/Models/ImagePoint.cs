@@ -2,10 +2,10 @@
 {
     public class ImagePoint
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
 
-        public ImagePoint(int x, int y)
+        public ImagePoint(double x, double y)
         {
             X = x;
             Y = y;

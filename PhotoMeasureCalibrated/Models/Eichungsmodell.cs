@@ -1,10 +1,22 @@
-﻿namespace PhotoMeasureCalibrated.Models;
+﻿using System.Windows;
+
+namespace PhotoMeasureCalibrated.Models;
 
 public class Eichungsmodell
 {
-    public ImagePoint? StartPoint { get; set; }
+    public ImagePoint StartPoint { get; set; }
 
-    public ImagePoint? EndPoint { get; set; }
+    public ImagePoint EndPoint { get; set; }
+
+    public double RealeLaengeInCm { get; set; }
+
+    public Eichungsmodell(Point start, Point end, double realeLaengeInCm)
+    {
+        StartPoint = new ImagePoint(start.X, start.Y);
+        EndPoint = new ImagePoint(end.X, end.Y);
+        RealeLaengeInCm = realeLaengeInCm;
+    }
+
 
     public double PointDistance
     {
@@ -16,15 +28,5 @@ public class Eichungsmodell
             double deltaY = EndPoint.Y - StartPoint.Y;
             return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
         }
-    }
-
-    public void AddStartPoint(int x, int y)
-    {
-        StartPoint = new ImagePoint(x, y);
-    }
-
-    public void AddEndPoint(int x, int y)
-    {
-        EndPoint = new ImagePoint(x, y);
     }
 }

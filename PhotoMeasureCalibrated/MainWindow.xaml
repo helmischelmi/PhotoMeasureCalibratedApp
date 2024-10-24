@@ -5,34 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhotoMeasureCalibrated"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:view="clr-namespace:PhotoMeasureCalibrated.View"
         mc:Ignorable="d"
-        Title="Photo Measure Calibrated " Height="650" Width="1000">
+        Title="Photo Measure Calibrated " Height="750" Width="1200">
     <Grid Background="LightGoldenrodYellow">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition/>
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Height="25">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Height="25">
 
             <Label Margin="10 0">Select Folder:</Label>
-            <TextBox Width="700" Text="{Binding ImagePath}"></TextBox>
+            <TextBox Width="800" Text="{Binding ImagePath}"/>
             <Button Content="Select" Width="100" Margin="10 0" Command="{Binding SelectFileCommand}" Grid.Row="2"/>
         </StackPanel>
-        <Image Name="DisplayedImage" Grid.Row="1" Source="{Binding Bitmap}" Height="500"
-               MouseLeftButtonDown="Image_MouseLeftButtonDown"
-               MouseMove="DisplayedImage_OnMouseMove" />
-        <!-- Canvas overlay on top of the image for drawing -->
-        <Canvas Name="DrawingCanvas"  Grid.Row="1"  Width="600" Height="400" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False">
-            <!-- This will be used to draw points -->
-        </Canvas>
+        <Image Name="DisplayedImage" Grid.Column="1" Grid.Row="1" Source="{Binding Bitmap}" Height="700"
+               Stretch="None"
+               SizeChanged="DisplayedImage_OnSizeChanged">
+            <b:Interaction.Behaviors>
+                <view:MouseMoveBehavior Command="{Binding MouseMoveCommand}"/>
+                <view:MouseClickBehavior Command="{Binding MouseClickCommand}"/>
+            </b:Interaction.Behaviors>
+        </Image>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" >
+        <!-- Canvas overlay on top of the image for drawing -->
+        <Border Grid.Column="1" Grid.Row="1" BorderBrush="Red" BorderThickness="2" 
+                Width="{Binding ActualWidth, ElementName=DisplayedImage}" 
+                Height="{Binding ActualHeight, ElementName=DisplayedImage}">
+            <!--<Canvas Name="DrawingCanvas" 
+                    Width="{Binding ActualWidth, ElementName=DisplayedImage}" 
+                    Height="{Binding ActualHeight, ElementName=DisplayedImage}"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                    IsHitTestVisible="False">
+                -->
+            <!-- This will be used to draw points -->
+            <!--
+
+            </Canvas>-->
+            <!-- Canvas for drawing -->
+            <Canvas 
+                Width="{Binding ActualWidth, ElementName=DisplayedImage}" 
+                Height="{Binding ActualHeight, ElementName=DisplayedImage}"
+                VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                IsHitTestVisible="False">
+
+                <ItemsControl ItemsSource="{Binding Shapes}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Canvas.Left" Value="{Binding Path=(Canvas.Left)}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Path=(Canvas.Top)}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+            </Canvas>
+        </Border>
+
+        <StackPanel Grid.Row="1">
             <!-- Button to enable drawing -->
-            <Button Name="EnableDrawingButton" Content="Enable Drawing" Width="100" Height="30" 
+            <Button Content="Eichungsmessung ON/OFF" Width="150" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
-                    Command="{Binding EnableDrawingCommand}"/>
-            <Label></Label>
+                    Margin="10 5"
+                    Command="{Binding ToggleEichungsDrawingCommand}"/>
+            <StackPanel Orientation="Horizontal" Margin="0 5">
+                <Label>Reale Länge [cm]:</Label>
+                <TextBox Height="23" Margin="10 0" Width="50"
+                     HorizontalAlignment="Left" HorizontalContentAlignment="Right"
+                     Text="{Binding RealeEichLaengeInCm}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Eichlänge im Bild:</Label>
+                <Label Width="50" Content="{Binding ImageEichLaenge}"></Label>
+            </StackPanel>
+
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" >
             <Grid Background="LightGoldenrodYellow">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="24" />
@@ -44,23 +101,23 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="70"/>
                 </Grid.ColumnDefinitions>
-                <Label>Bild</Label> 
-                <Label Grid.Row="1">Höhe (px/ pt)</Label> 
-                <Label Grid.Row="2">Breite (px/pt)</Label> 
+                <Label>Bild</Label>
+                <Label Grid.Row="1">Höhe (px/ pt)</Label>
+                <Label Grid.Row="2">Breite (px/pt)</Label>
                 <Label Grid.Column="1">Pixel</Label>
-                <Label Grid.Column="1" Grid.Row="1" Content="{Binding ImagePixelHeight}"></Label> 
-                <Label Grid.Column="1" Grid.Row="2" Content="{Binding ImagePixelWidth}"></Label> 
+                <Label Grid.Column="1" Grid.Row="1" Content="{Binding ImagePixelHeight}"></Label>
+                <Label Grid.Column="1" Grid.Row="2" Content="{Binding ImagePixelWidth}"></Label>
                 <Label Grid.Column="2">Points</Label>
-                <Label Name="PointsHeight" Grid.Column="2" Grid.Row="1" /> 
-                <Label Name="PointsWidth" Grid.Column="2" Grid.Row="2" /> 
+                <Label Name="PointsHeight" Grid.Column="2" Grid.Row="1" />
+                <Label Name="PointsWidth" Grid.Column="2" Grid.Row="2" />
                 <Label Grid.Column="3">Maus</Label>
-                <Label Grid.Column="3" Grid.Row="1">X-Position</Label> 
-                <Label Grid.Column="3" Grid.Row="2">Y-Position</Label> 
-                <Label Name="MousePositionX" Grid.Column="4" Grid.Row="1"/> 
-                <Label Name="MousePositionY" Grid.Column="4" Grid.Row="2"/> 
-                <Label Grid.Column="4">Wert</Label>
+                <Label Grid.Column="3" Grid.Row="1">Y-Position</Label>
+                <Label Grid.Column="3" Grid.Row="2">X-Position</Label>
+                <Label Grid.Column="4" Grid.Row="1" Content="{Binding MousePositionY, StringFormat={}{0:F1}}"/>
+                <Label Grid.Column="4" Grid.Row="2" Content="{Binding MousePositionX, StringFormat={}{0:F1}}"/>
+                <Label Grid.Column="4">Koordinate</Label>
 
             </Grid>
         </StackPanel>
