@@ -21,5 +21,22 @@ namespace PhotoMeasureCalibrated.View
             Canvas.SetTop(dot, point.Y - 2.5);
             return dot;
         }
+
+
+        public static Line DrawLine(Point point1, Point point2)
+        {
+            // Create a line between the two points
+            Line line = new Line
+            {
+                X1 = point1.X,
+                Y1 = point1.Y,
+                X2 = point2.X,
+                Y2 = point2.Y,
+                Stroke = Brushes.Red,
+                StrokeThickness = 2
+            };
+
+            return line;
+        }
     }
 }

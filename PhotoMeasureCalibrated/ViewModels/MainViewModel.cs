@@ -134,8 +134,8 @@ public partial class MainViewModel : ObservableObject
         {
             // Second click: Save the second point, draw the second red dot and a line
             SecondEichungsPoint = position;
-            DrawPoint(position);
-            DrawLine(FirstEichungsPoint.Value, SecondEichungsPoint.Value);
+            Shapes.Add(DrawingFigures.DrawPoint(position));
+            Shapes.Add(DrawingFigures.DrawLine(FirstEichungsPoint.Value, SecondEichungsPoint.Value));
         }
 
         if (FirstEichungsPoint != null && SecondEichungsPoint != null)
@@ -150,35 +150,5 @@ public partial class MainViewModel : ObservableObject
             SecondEichungsPoint = null;
             ToggleEichungsDrawing();
         }
-    }
-
-
-    private void DrawPoint(Point point)
-    {
-        // Create a red ellipse (dot) at the specified point
-        Ellipse dot = new Ellipse
-        {
-            Width = 5,
-            Height = 5,
-            Fill = Brushes.Red,
-        };
-        Canvas.SetLeft(dot, point.X - 2.5); // Center the dot
-        Canvas.SetTop(dot, point.Y - 2.5);
-        Shapes.Add(dot);
-    }
-
-    private void DrawLine(Point point1, Point point2)
-    {
-        // Create a line between the two points
-        Line line = new Line
-        {
-            X1 = point1.X,
-            Y1 = point1.Y,
-            X2 = point2.X,
-            Y2 = point2.Y,
-            Stroke = Brushes.Red,
-            StrokeThickness = 2
-        };
-        Shapes.Add(line);
     }
 }
