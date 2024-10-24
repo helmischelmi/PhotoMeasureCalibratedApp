@@ -16,13 +16,8 @@ namespace PhotoMeasureCalibrated
             var model = new MainModel();
             var mainViewModel = new MainViewModel(model);
             var mainWindow = new MainWindow {DataContext = mainViewModel};
-           
-            //LogginUtils.Init();
-
-            ((MainViewModel)mainWindow.DataContext).ImageFolderPath = "Hello";
-
+            
             mainWindow.Show();
-
         }
     }
 
