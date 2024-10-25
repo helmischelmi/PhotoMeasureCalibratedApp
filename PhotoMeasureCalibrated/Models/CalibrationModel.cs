@@ -10,13 +10,31 @@ public class CalibrationModel
 
     public double RealDistanceInCm { get; set; }
 
-    public CalibrationModel(Point start, Point end, double realDistanceInCm)
+
+    public bool IsVertexCompleted
     {
-        StartPoint = new ImagePoint(start.X, start.Y);
-        EndPoint = new ImagePoint(end.X, end.Y);
-        RealDistanceInCm = realDistanceInCm;
+        get
+        {
+            return StartPoint != null && EndPoint != null;
+        }
     }
 
+
+    public void GetRealDistanceInCm(double realDistance)
+    {
+        RealDistanceInCm = realDistance;
+    }
+
+
+    public void AddStartVertex(double x, double y)
+    {
+        StartPoint =  new ImagePoint(x, y);
+    }
+
+    public void AddEndVertex(double x, double y)
+    {
+        EndPoint = new ImagePoint(x, y);
+    }
 
     public double DistanceInImage
     {

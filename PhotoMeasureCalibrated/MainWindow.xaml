@@ -73,12 +73,18 @@
 
         <StackPanel Grid.Row="1">
             <!-- Button to enable drawing -->
+            <StackPanel Orientation="Horizontal" Margin="0 5">
+                <Label Width="100"> Benutzer:</Label>
+                <TextBox Height="23" Margin="10 0" Width="50"
+                         HorizontalAlignment="Left" HorizontalContentAlignment="Right"
+                         Text="{Binding Creator}"/>
+            </StackPanel>
             <Button Content="Eichungsmessung ON/OFF" Width="150" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="10 5"
-                    Command="{Binding ToggleEichungsDrawingCommand}"/>
+                    Command="{Binding ToggleCalibrationDrawingCommand}"/>
             <StackPanel Orientation="Horizontal" Margin="0 5">
-                <Label>Reale Länge [cm]:</Label>
+                <Label Width="100">Reale Länge [cm]:</Label>
                 <TextBox Height="23" Margin="10 0" Width="50"
                      HorizontalAlignment="Left" HorizontalContentAlignment="Right"
                      Text="{Binding RealDistanceInCm}"/>
@@ -91,6 +97,19 @@
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="10 5"
                     Command="{Binding ToggleBodyDrawingCommand}"/>
+            <StackPanel Orientation="Horizontal">
+                <Label>Körperlänge [cm]:</Label>
+                <Label Width="50" Content="{Binding RealBodyLength, StringFormat={}{0:F1}}"></Label>
+            </StackPanel>
+            <Button Content="Messung speichern" Width="150" Height="30" 
+                    HorizontalAlignment="Left" VerticalAlignment="Top" 
+                    Margin="10 5"
+                    Command="{Binding SaveResultsCommand}"/>
+
+            <Button Content="Reset Messung" Width="150" Height="30" 
+                    HorizontalAlignment="Left" VerticalAlignment="Top" 
+                    Margin="10 5"
+                    Command="{Binding ResetCommand}"/>
 
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" >
@@ -106,6 +125,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="70"/>
                 </Grid.ColumnDefinitions>
                 <Label>Bild</Label>
                 <Label Grid.Row="1">Höhe (px/ pt)</Label>
@@ -119,10 +140,12 @@
                 <Label Grid.Column="3">Maus</Label>
                 <Label Grid.Column="3" Grid.Row="1">Y-Position</Label>
                 <Label Grid.Column="3" Grid.Row="2">X-Position</Label>
+                <Label Grid.Column="4">Koordinate</Label>
                 <Label Grid.Column="4" Grid.Row="1" Content="{Binding MousePositionY, StringFormat={}{0:F1}}"/>
                 <Label Grid.Column="4" Grid.Row="2" Content="{Binding MousePositionX, StringFormat={}{0:F1}}"/>
-                <Label Grid.Column="4">Koordinate</Label>
-
+                <Label Grid.Column="6">Individuum</Label>
+                <Label Grid.Column="6" Grid.Row="1" Content="{Binding IndividuumNummer}"/>
+                <Label Grid.Column="6" Grid.Row="2" Content="{Binding ImageTimestamp}"/>
             </Grid>
         </StackPanel>
 

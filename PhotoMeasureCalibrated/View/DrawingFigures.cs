@@ -8,22 +8,41 @@ namespace PhotoMeasureCalibrated.View
     public class DrawingFigures
     {
 
-        public static Ellipse DrawPoint(Point point)
+        public static Ellipse DrawCalibrationPoint(Point point)
+        {
+            return DrawPoint(point, Brushes.Red,5);
+        }
+
+        public static Ellipse DrawMeasurementPoint(Point point)
+        {
+            return DrawPoint(point, Brushes.GreenYellow, 8);
+        }
+
+        public static Ellipse DrawPoint(Point point, Brush fill, double diameter)
         {
             // Create a red ellipse (dot) at the specified point
             Ellipse dot = new Ellipse
             {
-                Width = 5,
-                Height = 5,
-                Fill = Brushes.Red,
+                Width = diameter,
+                Height = diameter,
+                Fill = fill,
             };
-            Canvas.SetLeft(dot, point.X - 2.5); // Center the dot
-            Canvas.SetTop(dot, point.Y - 2.5);
+            Canvas.SetLeft(dot, point.X - diameter/2); // Center the dot
+            Canvas.SetTop(dot, point.Y - diameter/2);
             return dot;
         }
 
+        public static Line DrawCalibrationLine(Point point1, Point point2)
+        {
+            return DrawLine(point1, point2, Brushes.Red, 2);
+        }
 
-        public static Line DrawLine(Point point1, Point point2)
+        public static Line DrawMeasurementLine(Point point1, Point point2)
+        {
+            return DrawLine(point1, point2, Brushes.LightGreen, 4);
+        }
+
+        public static Line DrawLine(Point point1, Point point2, Brush stroke, double thickness)
         {
             // Create a line between the two points
             Line line = new Line
@@ -32,8 +51,8 @@ namespace PhotoMeasureCalibrated.View
                 Y1 = point1.Y,
                 X2 = point2.X,
                 Y2 = point2.Y,
-                Stroke = Brushes.Red,
-                StrokeThickness = 2
+                Stroke = stroke,
+                StrokeThickness = thickness
             };
 
             return line;
