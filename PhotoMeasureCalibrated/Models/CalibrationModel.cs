@@ -4,9 +4,9 @@ namespace PhotoMeasureCalibrated.Models;
 
 public class CalibrationModel
 {
-    public ImagePoint StartPoint { get; set; }
+    public Point? StartPoint { get; set; }
 
-    public ImagePoint EndPoint { get; set; }
+    public Point? EndPoint { get; set; }
 
     public double RealDistanceInCm { get; set; }
 
@@ -28,12 +28,12 @@ public class CalibrationModel
 
     public void AddStartVertex(double x, double y)
     {
-        StartPoint =  new ImagePoint(x, y);
+        StartPoint =  new Point(x, y);
     }
 
     public void AddEndVertex(double x, double y)
     {
-        EndPoint = new ImagePoint(x, y);
+        EndPoint = new Point(x, y);
     }
 
     public double DistanceInImage
@@ -42,8 +42,8 @@ public class CalibrationModel
         {
             if (StartPoint == null || EndPoint == null) return 0;
 
-            double deltaX = EndPoint.X - StartPoint.X;
-            double deltaY = EndPoint.Y - StartPoint.Y;
+            double deltaX = EndPoint.Value.X - StartPoint.Value.X;
+            double deltaY = EndPoint.Value.Y - StartPoint.Value.Y;
             return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
         }
     }

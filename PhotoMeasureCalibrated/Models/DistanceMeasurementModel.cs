@@ -8,7 +8,7 @@ namespace PhotoMeasureCalibrated.Models;
 
 public class DistanceMeasurementModel
 {
-    public List<ImagePoint> LineVertices { get; set; }
+    public List<Point> LineVertices { get; set; }
 
     public List<Line> Lines { get; set; }
 
@@ -21,8 +21,8 @@ public class DistanceMeasurementModel
 
             for (int i = 0; i < LineVertices.Count - 1; i++)
             {
-                ImagePoint p1 = LineVertices[i];
-                ImagePoint p2 = LineVertices[i + 1];
+                Point p1 = LineVertices[i];
+                Point p2 = LineVertices[i + 1];
 
                 laenge += GetPointDistance(LineVertices[i], LineVertices[i + 1]);
             }
@@ -37,39 +37,36 @@ public class DistanceMeasurementModel
 
     public DistanceMeasurementModel()
     {
-        LineVertices = new List<ImagePoint>();
+        LineVertices = new List<Point>();
         Lines = new List<Line>();
     }
 
 
     public void AddVertex(double x, double y)
     {
-        LineVertices.Add(new ImagePoint(x, y));
+        LineVertices.Add(new Point(x, y));
     }
 
 
-    private double GetPointDistance(ImagePoint? p1, ImagePoint? p2)
+    private double GetPointDistance(Point? p1, Point? p2)
     {
         if (p1 == null || p2 == null) return 0;
 
-        double deltaX = p2.X - p1.X;
-        double deltaY = p2.Y - p1.Y;
+        double deltaX = p2.Value.X - p1.Value.X;
+        double deltaY = p2.Value.Y - p1.Value.Y;
         return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
     }
 
-    public List<Line> EndMeasurement()
+    public Polyline EndMeasurement()
     {
+        return DrawingFigures.DrawSplineOnCanvas(LineVertices);
 
-
-        for (int i = 0; i < LineVertices.Count - 1; i++)
-        {
-            Lines.Add(DrawingFigures.DrawMeasurementLine(new Point(LineVertices[i].X, LineVertices[i].Y),
-                new Point(LineVertices[i + 1].X, LineVertices[i + 1].Y)));
-        }
-
-
-        return Lines;
-
+        //for (int i = 0; i < LineVertices.Count - 1; i++)
+        //{
+        //    Lines.Add(DrawingFigures.DrawMeasurementLine(new Point(LineVertices[i].X, LineVertices[i].Y),
+        //        new Point(LineVertices[i + 1].X, LineVertices[i + 1].Y)));
+        //}
+        
         //
         // display distance in cm
 

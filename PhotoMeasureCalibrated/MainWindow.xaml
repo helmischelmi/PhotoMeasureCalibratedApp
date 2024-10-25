@@ -72,23 +72,27 @@
         </Border>
 
         <StackPanel Grid.Row="1">
+
             <!-- Button to enable drawing -->
-            <StackPanel Orientation="Horizontal" Margin="0 5">
-                <Label Width="100"> Benutzer:</Label>
-                <TextBox Height="23" Margin="10 0" Width="50"
+            <StackPanel Background="Bisque">
+                <StackPanel Orientation="Horizontal" Margin="0 5">
+                    <Label Width="110">Benutzer:</Label>
+                    <TextBox Height="23" Margin="10 0" Width="50"
                          HorizontalAlignment="Left" HorizontalContentAlignment="Right"
                          Text="{Binding Creator}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 5">
+                    <Label Width="110">Eichungs-Länge [cm]:</Label>
+                    <TextBox Height="23" Margin="10 0" Width="50"
+                         HorizontalAlignment="Left" HorizontalContentAlignment="Right"
+                         Text="{Binding RealDistanceInCm}"/>
+                </StackPanel>
             </StackPanel>
             <Button Content="Eichungsmessung ON/OFF" Width="150" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="10 5"
                     Command="{Binding ToggleCalibrationDrawingCommand}"/>
-            <StackPanel Orientation="Horizontal" Margin="0 5">
-                <Label Width="100">Reale Länge [cm]:</Label>
-                <TextBox Height="23" Margin="10 0" Width="50"
-                     HorizontalAlignment="Left" HorizontalContentAlignment="Right"
-                     Text="{Binding RealDistanceInCm}"/>
-            </StackPanel>
+
             <StackPanel Orientation="Horizontal">
                 <Label>Eichlänge im Bild:</Label>
                 <Label Width="50" Content="{Binding ImageCalibrationDistance}"></Label>

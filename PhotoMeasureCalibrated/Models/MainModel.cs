@@ -1,8 +1,12 @@
-﻿namespace PhotoMeasureCalibrated.Models;
+﻿using System.IO;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+
+namespace PhotoMeasureCalibrated.Models;
 
 public class MainModel
 {
-    public string Path { get; set; }
+    public string Filepath { get; set; }
 
     public string Filename { get; set; }
 
@@ -26,16 +30,36 @@ public class MainModel
 
     public DistanceMeasurementModel Measurements { get; set; }
 
-    public string Remarks { get; set; }
+   //public string Remarks { get; set; }
 
     public void Reset()
     {
-        Path = null;
+        Filepath = null;
         Filename = null;
         ImageTimestamp = default;
         Creation = default;
         Calibration = new CalibrationModel();
         Measurements = new DistanceMeasurementModel();
-        Remarks = null;
+       //Remarks = null;
+    }
+
+    public void SaveAsJson()
+    {
+        try
+        {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true, // Optional: formats the JSON with indentation for readability
+                ReferenceHandler = ReferenceHandler.Preserve // Optional: handles circular references if necessary
+            };
+
+            string jsonString = JsonSerializer.Serialize(this, options);
+            File.WriteAllText(Path.Combine(Filepath, $"{Path.GetFileNameWithoutExtension(Filename)
+            }_calibratedMeasure.json"), jsonString);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred while saving MainModel data to JSON: {ex.Message}");
+        }
     }
 }

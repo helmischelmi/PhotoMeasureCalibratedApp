@@ -57,5 +57,19 @@ namespace PhotoMeasureCalibrated.View
 
             return line;
         }
+
+        public static Polyline DrawSplineOnCanvas(List<Point> points)
+        {
+            List<Point> splinePoints = SplineHelper.GenerateCatmullRomSpline(points);
+
+            Polyline splinePolyline = new Polyline
+            {
+                Stroke = Brushes.LightGreen, // Set color
+                StrokeThickness = 4,
+                Points = new PointCollection(splinePoints)
+            };
+
+            return splinePolyline;
+        }
     }
 }

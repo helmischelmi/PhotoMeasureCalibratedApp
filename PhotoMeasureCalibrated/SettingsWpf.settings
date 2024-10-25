@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PhotoMeasureCalibrated" GeneratedClassName="SettingsWpf">
+  <Profiles />
+  <Settings>
+    <Setting Name="Creator" Type="System.String" Scope="User">
+      <Value Profile="(Default)">HR</Value>
+    </Setting>
+    <Setting Name="Eichungsdistanz" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

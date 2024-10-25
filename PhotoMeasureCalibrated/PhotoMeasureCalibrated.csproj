@@ -18,8 +18,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="SettingsWpf.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SettingsWpf.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="SampleImages\SampleImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SettingsWpf.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SettingsWpf.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

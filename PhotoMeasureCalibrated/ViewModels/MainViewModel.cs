@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
@@ -79,6 +80,9 @@ public partial class MainViewModel : ObservableObject
         Model = model;
         ImagePixelHeight = 0;
         ImagePixelWidth = 0;
+
+        RealDistanceInCm = SettingsWpf.Default.Eichungsdistanz;
+        Creator = SettingsWpf.Default.Creator;
     }
 
     [RelayCommand]
@@ -95,7 +99,7 @@ public partial class MainViewModel : ObservableObject
             ImagePath = dialog.FileName;
         }
 
-        Model.Path = Path.GetDirectoryName(ImagePath);
+        Model.Filepath = Path.GetDirectoryName(ImagePath);
         Model.Filename = Path.GetFileName(ImagePath);
         IndividuumNummer = Model.IndividuumNumber;
 
@@ -168,14 +172,11 @@ public partial class MainViewModel : ObservableObject
         }
         else
         {
-            var lines = _measurementModel.EndMeasurement();
-
+            var polyline = _measurementModel.EndMeasurement();
+            Shapes.Add(polyline);
+            
             RealBodyLength = _measurementModel.GetRealDistanceInCm(_calibrationModel);
-
-            foreach (var line in lines)
-            {
-                Shapes.Add(line);
-            }
+        
         }
         Mouse.OverrideCursor = IsDrawBodyLengthEnabled ? Cursors.Pen : null;
     }
@@ -183,16 +184,14 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void SaveResults()
     {
+        UpdateSettings();
+        
         Model.Measurements = _measurementModel;
         Model.Creation = DateTime.UtcNow;
         Model.Calibration = _calibrationModel;
         Model.Creator = Creator;
 
-        //public string Creator { get; set; }
-
-
-        //public string Remarks { get; set; }
-
+        Model.SaveAsJson();
     }
 
     [RelayCommand]
@@ -248,8 +247,9 @@ public partial class MainViewModel : ObservableObject
             // Second click: Save the second point, draw the second red dot and a line
             _calibrationModel.AddEndVertex(position.X, position.Y);
             Shapes.Add(DrawingFigures.DrawCalibrationPoint(position));
-            Shapes.Add(DrawingFigures.DrawCalibrationLine(new Point(_calibrationModel.StartPoint.X,_calibrationModel.StartPoint.Y) 
-                , new Point(_calibrationModel.EndPoint.X, _calibrationModel.EndPoint.Y)));
+            Shapes.Add(DrawingFigures.DrawCalibrationLine(
+                new Point(_calibrationModel.StartPoint.Value.X,_calibrationModel.StartPoint.Value.Y), 
+                new Point(_calibrationModel.EndPoint.Value.X, _calibrationModel.EndPoint.Value.Y)));
         }
 
         if (_calibrationModel.IsVertexCompleted)
@@ -263,5 +263,12 @@ public partial class MainViewModel : ObservableObject
 
             ToggleCalibrationDrawing();
         }
+    }
+
+    private void UpdateSettings()
+    {
+        SettingsWpf.Default.Eichungsdistanz = RealDistanceInCm;
+        SettingsWpf.Default.Creator = Creator;
+        SettingsWpf.Default.Save();
     }
 }
