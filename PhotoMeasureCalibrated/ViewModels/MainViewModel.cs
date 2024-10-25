@@ -39,7 +39,13 @@ public partial class MainViewModel : ObservableObject
 
 
     [ObservableProperty]
-    private bool _isEichungsDrawingEnabled;
+    private bool _isDrawCalibrationEnabled;
+
+    [ObservableProperty]
+    private bool _isDrawBodyLengthEnabled;
+
+    [ObservableProperty]
+    private bool _isEichungsbodyEnabled;
 
     [ObservableProperty]
     private Point? _firstEichungsPoint;
@@ -48,10 +54,10 @@ public partial class MainViewModel : ObservableObject
     private Point? _secondEichungsPoint;
 
     [ObservableProperty]
-    private double _realeEichLaengeInCm;
+    private double _realDistanceInCm;
 
     [ObservableProperty]
-    private double _imageEichLaenge;
+    private double _imageCalibrationDistance;
 
     // Collection to hold the shapes to draw on the canvas
     public ObservableCollection<UIElement> Shapes { get; set; } = new ObservableCollection<UIElement>();
@@ -110,24 +116,29 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     public void ToggleEichungsDrawing()
     {
-        IsEichungsDrawingEnabled = !IsEichungsDrawingEnabled; // Toggle drawing mode
-        Mouse.OverrideCursor = IsEichungsDrawingEnabled ? Cursors.Cross : null;
+        IsDrawCalibrationEnabled = !IsDrawCalibrationEnabled; // Toggle drawing mode
+        Mouse.OverrideCursor = IsDrawCalibrationEnabled ? Cursors.Cross : null;
+    }
+
+    [RelayCommand]
+    public void ToggleBodyDrawing()
+    {
+        IsDrawBodyLengthEnabled = !IsDrawBodyLengthEnabled; // Toggle drawing mode
+        Mouse.OverrideCursor = IsDrawBodyLengthEnabled ? Cursors.Pen : null;
     }
 
     [RelayCommand]
     private void MouseClick(MouseButtonEventArgs e)
     {
-        if (!IsEichungsDrawingEnabled)
+        if (!IsDrawCalibrationEnabled)
             return;
 
-        // Get the clicked position on the image or canvas
+        // Get the clicked position on the image
         var position = e.GetPosition((IInputElement)e.Source);
 
         if (FirstEichungsPoint == null)
         {
-            // First click: Save the point and draw a red dot
-            FirstEichungsPoint = position;
-            //DrawPoint(position);
+            FirstEichungsPoint = position;// First click: Save the point and draw a red dot
             Shapes.Add(DrawingFigures.DrawPoint(position));
         }
         else if (SecondEichungsPoint == null)
@@ -140,10 +151,10 @@ public partial class MainViewModel : ObservableObject
 
         if (FirstEichungsPoint != null && SecondEichungsPoint != null)
         {
-            if (RealeEichLaengeInCm > 0)
+            if (RealDistanceInCm > 0)
             {
-                var eichung = new Eichungsmodell(FirstEichungsPoint.Value, SecondEichungsPoint.Value, RealeEichLaengeInCm);
-                ImageEichLaenge = eichung.PointDistance;
+                var eichung = new CalibrationModel(FirstEichungsPoint.Value, SecondEichungsPoint.Value, RealDistanceInCm);
+                ImageCalibrationDistance = eichung.DistanceInImage;
             }
 
             FirstEichungsPoint = null;// Reset points after drawing the line

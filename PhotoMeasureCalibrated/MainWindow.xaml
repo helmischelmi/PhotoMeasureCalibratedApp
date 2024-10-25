@@ -26,7 +26,7 @@
             <Button Content="Select" Width="100" Margin="10 0" Command="{Binding SelectFileCommand}" Grid.Row="2"/>
         </StackPanel>
         <Image Name="DisplayedImage" Grid.Column="1" Grid.Row="1" Source="{Binding Bitmap}" Height="700"
-               Stretch="None"
+               Stretch="Uniform"
                SizeChanged="DisplayedImage_OnSizeChanged">
             <b:Interaction.Behaviors>
                 <view:MouseMoveBehavior Command="{Binding MouseMoveCommand}"/>
@@ -81,12 +81,16 @@
                 <Label>Reale Länge [cm]:</Label>
                 <TextBox Height="23" Margin="10 0" Width="50"
                      HorizontalAlignment="Left" HorizontalContentAlignment="Right"
-                     Text="{Binding RealeEichLaengeInCm}"/>
+                     Text="{Binding RealDistanceInCm}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label>Eichlänge im Bild:</Label>
-                <Label Width="50" Content="{Binding ImageEichLaenge}"></Label>
+                <Label Width="50" Content="{Binding ImageCalibrationDistance}"></Label>
             </StackPanel>
+            <Button Content="Messung ON/OFF" Width="150" Height="30" 
+                    HorizontalAlignment="Left" VerticalAlignment="Top" 
+                    Margin="10 5"
+                    Command="{Binding ToggleBodyDrawingCommand}"/>
 
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" >

@@ -2,23 +2,23 @@
 
 namespace PhotoMeasureCalibrated.Models;
 
-public class Eichungsmodell
+public class CalibrationModel
 {
     public ImagePoint StartPoint { get; set; }
 
     public ImagePoint EndPoint { get; set; }
 
-    public double RealeLaengeInCm { get; set; }
+    public double RealDistanceInCm { get; set; }
 
-    public Eichungsmodell(Point start, Point end, double realeLaengeInCm)
+    public CalibrationModel(Point start, Point end, double realDistanceInCm)
     {
         StartPoint = new ImagePoint(start.X, start.Y);
         EndPoint = new ImagePoint(end.X, end.Y);
-        RealeLaengeInCm = realeLaengeInCm;
+        RealDistanceInCm = realDistanceInCm;
     }
 
 
-    public double PointDistance
+    public double DistanceInImage
     {
         get
         {

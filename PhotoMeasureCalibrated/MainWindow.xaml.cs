@@ -18,7 +18,7 @@ namespace PhotoMeasureCalibrated
         //{
         //    Point mousePosition = e.GetPosition(DisplayedImage);
 
-        //    if (((MainViewModel)DataContext).IsEichungsDrawingEnabled)
+        //    if (((MainViewModel)DataContext).IsDrawCalibrationEnabled)
         //    {
         //        DrawPoint(mousePosition.X, mousePosition.Y);
         //    }
