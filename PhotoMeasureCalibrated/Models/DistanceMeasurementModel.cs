@@ -61,15 +61,6 @@ public class DistanceMeasurementModel
     {
         return DrawingFigures.DrawSplineOnCanvas(LineVertices);
 
-        //for (int i = 0; i < LineVertices.Count - 1; i++)
-        //{
-        //    Lines.Add(DrawingFigures.DrawMeasurementLine(new Point(LineVertices[i].X, LineVertices[i].Y),
-        //        new Point(LineVertices[i + 1].X, LineVertices[i + 1].Y)));
-        //}
-        
-        //
-        // display distance in cm
-
     }
 
     public double GetRealDistanceInCm(CalibrationModel calibration)

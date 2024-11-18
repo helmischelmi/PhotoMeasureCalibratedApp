@@ -21,7 +21,7 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string _creator;
 
-    [ObservableProperty] 
+    [ObservableProperty]
     private string _individuumNummer;
 
     [ObservableProperty]
@@ -174,9 +174,9 @@ public partial class MainViewModel : ObservableObject
         {
             var polyline = _measurementModel.EndMeasurement();
             Shapes.Add(polyline);
-            
+
             RealBodyLength = _measurementModel.GetRealDistanceInCm(_calibrationModel);
-        
+
         }
         Mouse.OverrideCursor = IsDrawBodyLengthEnabled ? Cursors.Pen : null;
     }
@@ -185,19 +185,32 @@ public partial class MainViewModel : ObservableObject
     private void SaveResults()
     {
         UpdateSettings();
-        
+
         Model.Measurements = _measurementModel;
         Model.Creation = DateTime.UtcNow;
         Model.Calibration = _calibrationModel;
         Model.Creator = Creator;
 
         Model.SaveAsJson();
+
+        Model.SaveToExcel();
     }
 
     [RelayCommand]
     private void Reset()
     {
         Model.Reset();
+        Model.Creation = default;
+
+        IndividuumNummer = String.Empty;
+        ImageTimestamp = default;
+        ImagePath = String.Empty;
+        Bitmap = null;
+        ImagePixelWidth = 0;
+        ImagePixelHeight = 0;
+        RealBodyLength = 0;
+        ImageCalibrationDistance = 0;
+        Shapes.Clear();
     }
 
 
@@ -234,12 +247,12 @@ public partial class MainViewModel : ObservableObject
     {
         // Get the clicked position on the image
         var position = e.GetPosition((IInputElement)e.Source);
-        
+
         if (_calibrationModel.StartPoint == null)
         {
             _calibrationModel.AddStartVertex(position.X, position.Y);
 
-           // CalibrationStartpoint = position;// First click: Save the point and draw a red dot
+            // CalibrationStartpoint = position;// First click: Save the point and draw a red dot
             Shapes.Add(DrawingFigures.DrawCalibrationPoint(position));
         }
         else if (_calibrationModel.EndPoint == null)
@@ -248,7 +261,7 @@ public partial class MainViewModel : ObservableObject
             _calibrationModel.AddEndVertex(position.X, position.Y);
             Shapes.Add(DrawingFigures.DrawCalibrationPoint(position));
             Shapes.Add(DrawingFigures.DrawCalibrationLine(
-                new Point(_calibrationModel.StartPoint.Value.X,_calibrationModel.StartPoint.Value.Y), 
+                new Point(_calibrationModel.StartPoint.Value.X, _calibrationModel.StartPoint.Value.Y),
                 new Point(_calibrationModel.EndPoint.Value.X, _calibrationModel.EndPoint.Value.Y)));
         }
 

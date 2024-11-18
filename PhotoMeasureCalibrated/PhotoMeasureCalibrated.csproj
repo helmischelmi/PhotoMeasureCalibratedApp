@@ -10,11 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageReference Include="EPPlus" Version="7.5.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SampleImages\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,9 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="SampleImages\SampleImage.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="SettingsWpf.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>SettingsWpf.Designer.cs</LastGenOutput>
