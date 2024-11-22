@@ -52,11 +52,8 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private bool _isDrawBodyLengthEnabled;
 
-    //[ObservableProperty]
-    //private Point? _calibrationStartpoint;
-
-    //[ObservableProperty]
-    //private Point? _calibrationEndpoint;
+    [ObservableProperty]
+    private bool _isImageLoaded;
 
     [ObservableProperty]
     private double _realDistanceInCm;
@@ -99,10 +96,15 @@ public partial class MainViewModel : ObservableObject
             ImagePath = dialog.FileName;
         }
 
+        if (File.Exists(ImagePath) == false)
+        {
+            return;
+        }
+
         Model.Filepath = Path.GetDirectoryName(ImagePath);
         Model.Filename = Path.GetFileName(ImagePath);
         IndividuumNummer = Model.IndividuumNumber;
-
+        
         try
         {
             BitmapFrame frame = BitmapFrame.Create(new Uri(ImagePath), BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
@@ -133,6 +135,8 @@ public partial class MainViewModel : ObservableObject
             ImagePixelWidth = Bitmap.PixelWidth;
             ImagePixelHeight = Bitmap.PixelHeight;
         }
+
+        IsImageLoaded = true;
     }
 
 
@@ -199,6 +203,8 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void Reset()
     {
+        IsImageLoaded = false;
+
         Model.Reset();
         Model.Creation = default;
 

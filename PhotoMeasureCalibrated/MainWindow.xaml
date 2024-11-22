@@ -90,8 +90,21 @@
             </StackPanel>
             <Button Content="Eichungsmessung ON/OFF" Width="150" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
-                    Margin="10 5"
-                    Command="{Binding ToggleCalibrationDrawingCommand}"/>
+                    Margin="10 5" FontWeight="DemiBold"
+                    IsEnabled="{Binding IsImageLoaded}"
+                    Command="{Binding ToggleCalibrationDrawingCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightGray" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDrawCalibrationEnabled}" Value="True">
+                                <Setter Property="Background" Value="#FFE2213B" />
+                                <Setter Property="Foreground" Value="White" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
             <StackPanel Orientation="Horizontal">
                 <Label>Eichlänge im Bild:</Label>
@@ -99,8 +112,21 @@
             </StackPanel>
             <Button Content="Messung ON/OFF" Width="150" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
-                    Margin="10 5"
-                    Command="{Binding ToggleBodyDrawingCommand}"/>
+                    Margin="10 5" FontWeight="DemiBold"
+                    IsEnabled="{Binding IsImageLoaded}"
+                    Command="{Binding ToggleBodyDrawingCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightGray" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDrawBodyLengthEnabled}" Value="True">
+                                <Setter Property="Background" Value="Green" />
+                                <Setter Property="Foreground" Value="White" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <StackPanel Orientation="Horizontal">
                 <Label>Körperlänge [cm]:</Label>
                 <Label Width="50" Content="{Binding RealBodyLength, StringFormat={}{0:F1}}"></Label>
@@ -108,11 +134,13 @@
             <Button Content="Messung speichern" Width="150" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="10 5"
+                    IsEnabled="{Binding IsImageLoaded}"
                     Command="{Binding SaveResultsCommand}"/>
 
             <Button Content="Reset Messung" Width="150" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="10 5"
+                    IsEnabled="{Binding IsImageLoaded}"
                     Command="{Binding ResetCommand}"/>
 
         </StackPanel>
