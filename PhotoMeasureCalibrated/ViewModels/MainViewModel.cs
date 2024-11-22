@@ -56,6 +56,9 @@ public partial class MainViewModel : ObservableObject
     private bool _isImageLoaded;
 
     [ObservableProperty]
+    private bool _isMeasureSaved;
+
+    [ObservableProperty]
     private double _realDistanceInCm;
 
     [ObservableProperty]
@@ -190,14 +193,19 @@ public partial class MainViewModel : ObservableObject
     {
         UpdateSettings();
 
+    
+
         Model.Measurements = _measurementModel;
         Model.Creation = DateTime.UtcNow;
         Model.Calibration = _calibrationModel;
         Model.Creator = Creator;
 
+        IsMeasureSaved = true;
         Model.SaveAsJson();
-
         Model.SaveToExcel();
+        Thread.Sleep(500);
+
+        IsMeasureSaved = false;
     }
 
     [RelayCommand]

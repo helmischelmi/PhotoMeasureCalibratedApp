@@ -6,7 +6,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier> <!-- Für Windows 64-Bit -->
+    <SelfContained>true</SelfContained> <!-- Alle Abhängigkeiten einbinden -->
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile> <!-- Datei verkleinern -->
   </PropertyGroup>
+
+
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />

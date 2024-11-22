@@ -88,7 +88,7 @@
                          Text="{Binding RealDistanceInCm}"/>
                 </StackPanel>
             </StackPanel>
-            <Button Content="Eichungsmessung ON/OFF" Width="150" Height="30" 
+            <Button Content="Eichungsmessung ON/OFF" Width="180" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="10 5" FontWeight="DemiBold"
                     IsEnabled="{Binding IsImageLoaded}"
@@ -110,7 +110,7 @@
                 <Label>Eichlänge im Bild:</Label>
                 <Label Width="50" Content="{Binding ImageCalibrationDistance}"></Label>
             </StackPanel>
-            <Button Content="Messung ON/OFF" Width="150" Height="30" 
+            <Button Content="Messung ON/OFF" Width="180" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="10 5" FontWeight="DemiBold"
                     IsEnabled="{Binding IsImageLoaded}"
@@ -131,15 +131,27 @@
                 <Label>Körperlänge [cm]:</Label>
                 <Label Width="50" Content="{Binding RealBodyLength, StringFormat={}{0:F1}}"></Label>
             </StackPanel>
-            <Button Content="Messung speichern" Width="150" Height="30" 
+            <Button Content="Messung speichern" Width="180" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
-                    Margin="10 5"
+                    Margin="10 25" FontWeight="DemiBold"
                     IsEnabled="{Binding IsImageLoaded}"
-                    Command="{Binding SaveResultsCommand}"/>
+                    Command="{Binding SaveResultsCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightGray" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMeasureSaved}" Value="True">
+                                <Setter Property="Background" Value="Black" />
+                                <Setter Property="Foreground" Value="Red" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-            <Button Content="Reset Messung" Width="150" Height="30" 
+            <Button Content="Reset" Width="100" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
-                    Margin="10 5"
+                    Margin="10 50" FontWeight="DemiBold"
                     IsEnabled="{Binding IsImageLoaded}"
                     Command="{Binding ResetCommand}"/>
 
