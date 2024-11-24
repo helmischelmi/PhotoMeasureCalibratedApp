@@ -49,8 +49,8 @@ Unterhalb des "Messung"-Buttons erscheint die gemessenen Länge in cm.
 
 ![09_CalibrationLineAndMeasuredSplineAndSaved](https://github.com/user-attachments/assets/84b200de-7c66-47e3-8e08-9eefb9fc4d0e)
 
-10. Ist das Ergebnis nicht gut und die Messung soll wiederholt werden, werden alle Messdaten mit Reset bereinigt. Das Foto muss neu geladen werden.
-13. Ist das Ergebnis gut, kann nach dem "Reset" ein neues Foto vermessen werden.
+10. Ist das Ergebnis nicht gut und die Messung soll wiederholt werden, werden alle Messdaten mit dem Button "Reset" entfernt. Das Foto muss neu geladen werden.
+13. Ist das Ergebnis gut, kann ebenfalls nach dem "Reset" ein neues Foto vermessen werden.
 
 
 ## Konfiguration
