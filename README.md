@@ -31,7 +31,7 @@ Ein kleiner roter Punkt wurde am linken Balkenrand gesetzt und der Mauszeiger be
 ![04_CalibrationFirstPointWithDynamicLineBlue](https://github.com/user-attachments/assets/950a3a48-91c8-4ecf-93f7-a70073d21edb)
 Nach dem Setzen des ersten Punkts zieht der Mauszeiger eine dynamische blaue Linie mit sich, die optisch helfen soll, den senkkrecht auf der gegenüberliegenden Balkenseite liegnden Punkt zu bestimmen.
 ![05_CalibrationEndPointReady](https://github.com/user-attachments/assets/82b60ec2-c2d7-4e2b-9e35-5ba3cb9c13fd)
-
+Wird der zweite Punkt gesetzt, erscheint das Kalibrierungsmaß als rote Linie.
 
 5. Nach der Kalibirierung beginnt die Vermessung. Dazu wird in der App der Button "Messung" geklickt. Der Buttung ist nun während der Messung grün gefärbt und der Mauszeiger wird zu einem Stift-Symbol.
 ![06_CalibrationLineAndMeasurePoints](https://github.com/user-attachments/assets/15d90a3f-e2fe-417b-88ec-89f9d4fba555)
