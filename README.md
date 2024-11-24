@@ -40,7 +40,7 @@ Wird der zweite Punkt gesetzt, erscheint das Kalibrierungsmaß als rote Linie.
 
 ![07_MeasurePointsEnd](https://github.com/user-attachments/assets/8e9cd606-09d9-483c-809c-db87b7b48982)
 
-8. Ist das der letzte Vermessungspunkt gesetzt, wird wieder auf den Button "Messung" geklickt, um die Messung abzuschließen. Die Punktreihe wird in einen Spline umgewandelt, um die Körperform besser nachzubilden.
+8. Ist der letzte Vermessungspunkt gesetzt, wird wieder auf den Button "Messung" geklickt, um die Messung abzuschließen. Die Punktreihe wird in einen Spline umgewandelt, um die Körperform besser nachzubilden.
 ![08_CalibrationLineAndMeasuredSpline](https://github.com/user-attachments/assets/2fe13101-6623-417a-8b3f-892c749ba8b7)
 
 Unterhalb des "Messung"-Buttons erscheint die gemessenen Länge in cm.
