@@ -133,21 +133,23 @@
             </StackPanel>
             <Button Content="Messung speichern" Width="180" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
-                    Margin="10 25" FontWeight="DemiBold"
+                    Margin="10 25 10 10" FontWeight="DemiBold"
                     IsEnabled="{Binding IsImageLoaded}"
                     Command="{Binding SaveResultsCommand}">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="LightGray" />
+            </Button>
+            <StackPanel Height="20" Width="180">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Background" Value="Bisque" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsMeasureSaved}" Value="True">
-                                <Setter Property="Background" Value="Black" />
-                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Background" Value="Green" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </Button.Style>
-            </Button>
+                </StackPanel.Style>
+            </StackPanel>
+
 
             <Button Content="Reset" Width="100" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 

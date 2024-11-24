@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -11,6 +12,7 @@ using Microsoft.Win32;
 using PhotoMeasureCalibrated.Models;
 using PhotoMeasureCalibrated.View;
 using Path = System.IO.Path;
+using Point = System.Windows.Point;
 
 namespace PhotoMeasureCalibrated.ViewModels;
 
@@ -75,6 +77,8 @@ public partial class MainViewModel : ObservableObject
 
     private CalibrationModel _calibrationModel;
 
+    private Line _dynamicLine;
+
     public MainViewModel(MainModel model)
     {
         Model = model;
@@ -107,7 +111,7 @@ public partial class MainViewModel : ObservableObject
         Model.Filepath = Path.GetDirectoryName(ImagePath);
         Model.Filename = Path.GetFileName(ImagePath);
         IndividuumNummer = Model.IndividuumNumber;
-        
+
         try
         {
             BitmapFrame frame = BitmapFrame.Create(new Uri(ImagePath), BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
@@ -152,6 +156,16 @@ public partial class MainViewModel : ObservableObject
             Point position = e.GetPosition(element);
             MousePositionX = position.X;
             MousePositionY = position.Y;
+
+            if (_calibrationModel == null)
+            {
+                return;
+            }
+            // Aktualisiere die Linie dynamisch, wenn der Startpunkt gesetzt ist und kein Endpunkt existiert
+            if (_calibrationModel.StartPoint.HasValue && _dynamicLine != null && _calibrationModel.EndPoint.HasValue == false)
+            {
+                DrawingFigures.UpdateDynamicLine(_dynamicLine, position);
+            }
         }
     }
 
@@ -189,11 +203,9 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void SaveResults()
+    private async Task SaveResults()
     {
         UpdateSettings();
-
-    
 
         Model.Measurements = _measurementModel;
         Model.Creation = DateTime.UtcNow;
@@ -203,15 +215,15 @@ public partial class MainViewModel : ObservableObject
         IsMeasureSaved = true;
         Model.SaveAsJson();
         Model.SaveToExcel();
-        Thread.Sleep(500);
-
-        IsMeasureSaved = false;
+        Task.Delay(2000);
     }
+
 
     [RelayCommand]
     private void Reset()
     {
         IsImageLoaded = false;
+        IsMeasureSaved = false;
 
         Model.Reset();
         Model.Creation = default;
@@ -266,13 +278,23 @@ public partial class MainViewModel : ObservableObject
         {
             _calibrationModel.AddStartVertex(position.X, position.Y);
 
+            // Initialisiere die Linie
+            _dynamicLine = DrawingFigures.BeginDynamicLine(position);
+
             // CalibrationStartpoint = position;// First click: Save the point and draw a red dot
             Shapes.Add(DrawingFigures.DrawCalibrationPoint(position));
+            Shapes.Add(_dynamicLine);
         }
         else if (_calibrationModel.EndPoint == null)
         {
             // Second click: Save the second point, draw the second red dot and a line
             _calibrationModel.AddEndVertex(position.X, position.Y);
+
+            _dynamicLine.X2 = position.X;
+            _dynamicLine.Y2 = position.Y;
+            Shapes.Remove(_dynamicLine);
+            _dynamicLine = null; // Beende die dynamische Linie
+
             Shapes.Add(DrawingFigures.DrawCalibrationPoint(position));
             Shapes.Add(DrawingFigures.DrawCalibrationLine(
                 new Point(_calibrationModel.StartPoint.Value.X, _calibrationModel.StartPoint.Value.Y),

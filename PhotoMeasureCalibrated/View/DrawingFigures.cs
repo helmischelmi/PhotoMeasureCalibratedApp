@@ -37,6 +37,28 @@ namespace PhotoMeasureCalibrated.View
             return DrawLine(point1, point2, Brushes.Red, 2);
         }
 
+        public static Line BeginDynamicLine(Point point1)
+        {
+            Line line = new Line
+            {
+                X1 = point1.X,
+                Y1 = point1.Y,
+                X2 = point1.X,
+                Y2 = point1.Y,
+                Stroke = Brushes.Blue,
+                StrokeThickness = 2
+            };
+
+            return line;
+        }
+
+        public static void UpdateDynamicLine(Line dynamicLine, Point point2)
+        {
+            dynamicLine.X2 = point2.X;
+            dynamicLine.Y2 = point2.Y;
+        }
+
+
         public static Line DrawMeasurementLine(Point point1, Point point2)
         {
             return DrawLine(point1, point2, Brushes.LightGreen, 4);
