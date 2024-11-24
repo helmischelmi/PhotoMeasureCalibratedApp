@@ -27,7 +27,7 @@ um einen einfachen Zugriff zu haben.
 4. Nun sollen zwei Punkte auf dem Fotogesetzt werden, die der bekannten Objektgröße entsprchen. Auf dem Foto wird dazu durch linken Mausklick der erste Punkt an der einen Balkenseite gesetzt und dann im senkrechten Abstand der zweite und letzte Punkt auf der anderen Balkenseite. Diese Entfernung entspricht in der Realität 7 cm. Zu optischen Unterstützung zum Finden der Senkrechten des Balkens wird eine dynamische Linie zwischen dem ersten Punkt und er Mausposition angezeigt (blaue Linie). Nach dem setzen des Endunkts ist die Kalibierung abgeschlossen und der Mauszeiger wird wieder "normal" und der Button grau.
 
 ![03_CalibrationFirstPoint](https://github.com/user-attachments/assets/8ea3ddbe-cb68-4848-909d-67ccc9482c96)
-
+Ein kleiner roter Punkt wurde am linken Balkenrand gesetzt und der Mauszeiger befindet sich als Kreuz über dem rechten Balkenrand.
 ![04_CalibrationFirstPointWithDynamicLineBlue](https://github.com/user-attachments/assets/950a3a48-91c8-4ecf-93f7-a70073d21edb)
 
 ![05_CalibrationEndPointReady](https://github.com/user-attachments/assets/82b60ec2-c2d7-4e2b-9e35-5ba3cb9c13fd)
