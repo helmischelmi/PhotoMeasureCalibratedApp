@@ -1,4 +1,4 @@
-# Calibratad Photo Measure Application (Windows)
+# Calibrated Photo Measure Application (Windows)
 
 ## Zweck
 
