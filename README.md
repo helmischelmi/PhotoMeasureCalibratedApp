@@ -29,7 +29,7 @@ um einen einfachen Zugriff zu haben.
 ![03_CalibrationFirstPoint](https://github.com/user-attachments/assets/8ea3ddbe-cb68-4848-909d-67ccc9482c96)
 Ein kleiner roter Punkt wurde am linken Balkenrand gesetzt und der Mauszeiger befindet sich als Kreuz über dem rechten Balkenrand.
 ![04_CalibrationFirstPointWithDynamicLineBlue](https://github.com/user-attachments/assets/950a3a48-91c8-4ecf-93f7-a70073d21edb)
-
+Nach dem Setzen des ersten Punkts zieht der Mauszeiger eine dynamische blaue Linie mit sich, die optisch helfen soll, den senkkrecht auf der gegenüberliegenden Balkenseite liegnden Punkt zu bestimmen.
 ![05_CalibrationEndPointReady](https://github.com/user-attachments/assets/82b60ec2-c2d7-4e2b-9e35-5ba3cb9c13fd)
 
 
