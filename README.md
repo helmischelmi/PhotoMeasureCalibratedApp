@@ -2,13 +2,14 @@
 
 ## Zweck
 
-Diese Software soll die Vermessung der Größe eines Objekts auf einem Foto vereinfachen.
-Mit Hilfe eines weiteren Objekts mit bekannter Abmessung wird das Foto zunächst zu Vermessung kalibriert.
-Die anschliessende Vermessung des zu untersuchenden Objekts erlaubt beliebige Formen.
+Diese Software dient der Vermessung der Größe eines Objekts auf einem Foto. 
+Mit Hilfe eines weiteren Objekts mit bekannter Abmessung wird das Foto zunächst für die Vermessung kalibriert.
+Die anschliessende Vermessung des zu untersuchenden Objekts erlaubt beliebige Formen: Das Objekt wird als Linie digitalisiert und vermessen, z.B. als sich schlängelte Linie vom Kopf entlang des Rückgrats bis zum Schwanzende eines Salamanders.
 
 ## Installation
 
-Die Software kann herunter geladen werden und ist auf einem Windows-System lauffähig.
+Die lauffähige Software kann hier herunter geladen werden. Sie ist auf einem Windows-System lauffähig (z.B Win11, 64-bit).
+
 Der Download sollte in einen entsprechend benannten Ordner für die Software erfolgen.
 In diesem Ordner sollte die auszuführnde Datei "" als Link auf den Desktop o.ä. kopiert werden, 
 um einen einfachen Zugriff zu haben.
