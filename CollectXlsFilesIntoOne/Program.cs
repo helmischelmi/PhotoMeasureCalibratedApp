@@ -41,6 +41,7 @@ namespace CollectXlsFilesIntoOne
                                     break;
 
                                 case 4:
+                                    Console.WriteLine($"Quality= {worksheet.Cell(row, column).Value.ToString()}");
                                     dataRow.AddLengthQuality(worksheet.Cell(row, column).Value.ToString());
                                     break;
 
@@ -56,7 +57,8 @@ namespace CollectXlsFilesIntoOne
             }
 
             // Speichere die gesammelten Daten in eine neue Excel-Datei
-            string ausgabeDatei = Path.Combine(startPfad, "Tierlaengen.xlsx");
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string ausgabeDatei = Path.Combine(startPfad, $"Tierlaengen_{timestamp}.xlsx");
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Längenmessung");
@@ -66,12 +68,14 @@ namespace CollectXlsFilesIntoOne
                 worksheet.Cell(1, 1).Value = "Individuum";
                 worksheet.Cell(1, 2).Value = "Aufnahmedatum";
                 worksheet.Cell(1, 3).Value = "LängeInCm";
+                worksheet.Cell(1, 4).Value = "Qualität";
 
                 for (int i = 1; i < gesammelteDaten.Count; i++)
                 {
                     worksheet.Cell(i + 1, 1).Value = gesammelteDaten[i].Individuum;
                     worksheet.Cell(i + 1, 2).Value = gesammelteDaten[i].Aufnahmedatum;
                     worksheet.Cell(i + 1, 3).Value = gesammelteDaten[i].Length;
+                    worksheet.Cell(i + 1, 4).Value = gesammelteDaten[i].LengthQuality;
                 }
 
                 workbook.SaveAs(ausgabeDatei);

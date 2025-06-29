@@ -67,7 +67,7 @@ public class MainModel
     {
         string filePath = Path.Combine(Filepath, $"{Path.GetFileNameWithoutExtension(Filename)}_calibratedMeasure.xlsx");
 
-        ExcelPackage.License.SetNonCommercialOrganization("My person");
+        ExcelPackage.License.SetNonCommercialOrganization("Helli Pirelly");
 
         using (var package = new ExcelPackage())
         {
