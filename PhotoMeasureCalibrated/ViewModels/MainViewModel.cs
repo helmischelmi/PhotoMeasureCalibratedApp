@@ -67,6 +67,9 @@ public partial class MainViewModel : ObservableObject
     private double _realBodyLength;
 
     [ObservableProperty]
+    private int _bodyLengthQuality;
+
+    [ObservableProperty]
     private double _imageCalibrationDistance;
 
     // Collection to hold the shapes to draw on the canvas
@@ -206,6 +209,8 @@ public partial class MainViewModel : ObservableObject
     private async Task SaveResults()
     {
         UpdateSettings();
+
+        _measurementModel.MeasurementQuality = BodyLengthQuality;
 
         Model.Measurements = _measurementModel;
         Model.Creation = DateTime.UtcNow;

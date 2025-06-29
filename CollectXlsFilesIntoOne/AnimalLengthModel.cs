@@ -1,4 +1,6 @@
-﻿namespace CollectXlsFilesIntoOne
+﻿using System;
+
+namespace CollectXlsFilesIntoOne
 {
     public class AnimalLengthModel
     {
@@ -8,16 +10,19 @@
 
         public double Length { get; set; }
 
-        public AnimalLengthModel(string individuum, DateTime aufnahmedatum, double length)
+        public int LengthQuality { get; set; }
+
+        public AnimalLengthModel(string individuum, DateTime aufnahmedatum, double length, int lengthQuality)
         {
             Individuum = individuum;
             Aufnahmedatum = aufnahmedatum;
             Length = length;
+            LengthQuality = lengthQuality;
         }
 
         public AnimalLengthModel()
         {
-            
+           
         }
 
         public void AddIndividuum(string ind)
@@ -35,6 +40,10 @@
             Length= Convert.ToDouble(length);
         }
 
+        public void AddLengthQuality(string length)
+        {
+            LengthQuality= Convert.ToInt32(LengthQuality);
+        }
 
         public override string ToString()
         {

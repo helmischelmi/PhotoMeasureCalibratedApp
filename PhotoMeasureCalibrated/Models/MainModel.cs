@@ -77,11 +77,13 @@ public class MainModel
             worksheet.Cells[1, 1].Value = "Individuum";
             worksheet.Cells[1, 2].Value = "Aufnahmedatum";
             worksheet.Cells[1, 3].Value = "Länge in cm";
+            worksheet.Cells[1, 4].Value = "Qualität";
 
             // Werte in die erste Datenzeile schreiben
             worksheet.Cells[2, 1].Value = IndividuumNumber;
             worksheet.Cells[2, 2].Value = ImageTimestamp;
             worksheet.Cells[2, 3].Value = Measurements.RealMeasuredDistanceInCm;
+            worksheet.Cells[2, 4].Value = Measurements.MeasurementQuality;
 
             // Formatierung für das Datum
             worksheet.Cells[2, 2].Style.Numberformat.Format = "dd.MM.yyyy";

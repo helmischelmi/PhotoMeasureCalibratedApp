@@ -1,4 +1,7 @@
-﻿using ClosedXML.Excel;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using ClosedXML.Excel;
 
 namespace CollectXlsFilesIntoOne
 {
@@ -21,7 +24,7 @@ namespace CollectXlsFilesIntoOne
                     for (int row = 2; row <= 2; row++)
                     {
                         var dataRow = new AnimalLengthModel();
-                        for (int column = 1; column <= 3; column++)
+                        for (int column = 1; column <= 4; column++)
                         {
                             switch (column)
                             {
@@ -35,6 +38,10 @@ namespace CollectXlsFilesIntoOne
 
                                 case 3:
                                     dataRow.AddLength(worksheet.Cell(row, column).Value.ToString());
+                                    break;
+
+                                case 4:
+                                    dataRow.AddLengthQuality(worksheet.Cell(row, column).Value.ToString());
                                     break;
 
                                 default:

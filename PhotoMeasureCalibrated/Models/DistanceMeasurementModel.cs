@@ -33,7 +33,7 @@ public class DistanceMeasurementModel
 
     public double RealMeasuredDistanceInCm { get; set; }
 
-
+    public int MeasurementQuality { get; set; }
 
     public DistanceMeasurementModel()
     {
@@ -47,6 +47,10 @@ public class DistanceMeasurementModel
         LineVertices.Add(new Point(x, y));
     }
 
+    public void AddQuality(int measurementQuality)
+    {
+        MeasurementQuality = measurementQuality;
+    }
 
     private double GetPointDistance(Point? p1, Point? p2)
     {

@@ -7,8 +7,12 @@
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:view="clr-namespace:PhotoMeasureCalibrated.View"
+        xmlns:converters="clr-namespace:PhotoMeasureCalibrated.Converters"
         mc:Ignorable="d"
         Title="Photo Measure Calibrated " Height="750" Width="1200">
+    <Window.Resources>
+        <converters:IntegerToBooleanConverter x:Key="IntToBool"/>
+    </Window.Resources>
     <Grid Background="LightGoldenrodYellow">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -38,16 +42,7 @@
         <Border Grid.Column="1" Grid.Row="1" BorderBrush="Red" BorderThickness="2" 
                 Width="{Binding ActualWidth, ElementName=DisplayedImage}" 
                 Height="{Binding ActualHeight, ElementName=DisplayedImage}">
-            <!--<Canvas Name="DrawingCanvas" 
-                    Width="{Binding ActualWidth, ElementName=DisplayedImage}" 
-                    Height="{Binding ActualHeight, ElementName=DisplayedImage}"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Center" 
-                    IsHitTestVisible="False">
-                -->
-            <!-- This will be used to draw points -->
-            <!--
 
-            </Canvas>-->
             <!-- Canvas for drawing -->
             <Canvas 
                 Width="{Binding ActualWidth, ElementName=DisplayedImage}" 
@@ -131,6 +126,33 @@
                 <Label>Körperlänge [cm]:</Label>
                 <Label Width="50" Content="{Binding RealBodyLength, StringFormat={}{0:F1}}"></Label>
             </StackPanel>
+
+            <GroupBox Header="Qualität" Margin="8">
+                <StackPanel>
+                    <RadioButton
+                        Content="Gut"
+                        GroupName="Qualität"
+                        IsChecked="{Binding BodyLengthQuality, Converter={StaticResource IntToBool}, ConverterParameter=1, Mode=TwoWay}" />
+                    <RadioButton
+                        Content="Noch Gut"
+                        GroupName="Qualität"
+                        IsChecked="{Binding BodyLengthQuality, Converter={StaticResource IntToBool}, ConverterParameter=2, Mode=TwoWay}" />
+                    <RadioButton
+                        Content="Mittel"
+                        GroupName="Qualität"
+                        IsChecked="{Binding BodyLengthQuality, Converter={StaticResource IntToBool}, ConverterParameter=3, Mode=TwoWay}" />
+                    <RadioButton
+                        Content="Gering"
+                        GroupName="Qualität"
+                        IsChecked="{Binding BodyLengthQuality, Converter={StaticResource IntToBool}, ConverterParameter=4, Mode=TwoWay}" />
+                    <RadioButton
+                        Content="Nicht verwenden"
+                        GroupName="Qualität"
+                        IsChecked="{Binding BodyLengthQuality, Converter={StaticResource IntToBool}, ConverterParameter=5, Mode=TwoWay}" />
+                </StackPanel>
+            </GroupBox>
+
+
             <Button Content="Messung speichern" Width="180" Height="30" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="10 25 10 10" FontWeight="DemiBold"
